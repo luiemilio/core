@@ -64,6 +64,7 @@ function five0BaseOptions() {
         'aspectRatio': 0,
         'autoShow': false,
         'backgroundThrottling': false,
+        'contentNavigation': {},
         'contextMenuSettings': contextMenuSettings,
         'cornerRounding': {
             'height': 0,

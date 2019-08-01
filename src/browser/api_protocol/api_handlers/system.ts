@@ -51,7 +51,7 @@ export const SystemApiMap: APIHandlerMap = {
     'convert-options': convertOptions,
     'delete-cache-request': { apiFunc: deleteCacheRequest, apiPath: '.deleteCacheOnExit' },
     'download-asset': { apiFunc: downloadAsset, apiPath: '.downloadAsset', defaultPermission: false },
-    'download-preload-scripts': { apiFunc: downloadPreloadScripts, apiPath: '.downloadPreloadScripts'},
+    'download-preload-scripts': { apiFunc: downloadPreloadScripts, apiPath: '.downloadPreloadScripts' },
     'download-runtime': { apiFunc: downloadRuntime, apiPath: '.downloadRuntime' },
     'exit-desktop': { apiFunc: exitDesktop, apiPath: '.exit' },
     'flush-cookie-store': { apiFunc: flushCookieStore, apiPath: '.flushCookieStore' },
@@ -66,6 +66,7 @@ export const SystemApiMap: APIHandlerMap = {
     'get-crash-reporter-state': getCrashReporterState,
     'get-device-id': { apiFunc: getDeviceId, apiPath: '.getDeviceId' },
     'get-device-user-id': { apiFunc: getDeviceUserId, apiPath: '.getDeviceUserId' },
+    'get-machine-user-id': { apiFunc: getMachineUserId, apiPath: '.getMachineUserId' },
     'get-entity-info': getEntityInfo,
     'get-environment-variable': { apiFunc: getEnvironmentVariable, apiPath: '.getEnvironmentVariable' },
     'get-focused-window': getFocusedWindow,
@@ -200,6 +201,12 @@ function getAppAssetInfo(identity: Identity, message: APIMessage, ack: Acker, na
 function getDeviceUserId(identity: Identity, message: APIMessage, ack: Acker): void {
     const dataAck = Object.assign({}, successAck);
     dataAck.data = System.getDeviceUserId();
+    ack(dataAck);
+}
+
+function getMachineUserId(identity: Identity, message: APIMessage, ack: Acker): void {
+    const dataAck = Object.assign({}, successAck);
+    dataAck.data = System.getMachineUserId();
     ack(dataAck);
 }
 
@@ -342,13 +349,13 @@ function getEntityInfo(identity: Identity, message: APIMessage, ack: Acker, nack
 
 function getFocusedWindow(identity: Identity, message: APIMessage, ack: Acker): void {
     const dataAck = Object.assign({}, successAck);
-    const {locals} = message;
+    const { locals } = message;
     if (locals && locals.aggregate) {
-       const found = locals.aggregate.find((x: any) => !!x);
-       if (found) {
-           dataAck.data = found;
-           return ack(dataAck);
-       }
+        const found = locals.aggregate.find((x: any) => !!x);
+        if (found) {
+            dataAck.data = found;
+            return ack(dataAck);
+        }
     }
     dataAck.data = System.getFocusedWindow();
     ack(dataAck);

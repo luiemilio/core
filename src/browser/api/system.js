@@ -250,6 +250,23 @@ export const System = {
 
         return hash.digest('hex');
     },
+    getMachineUserId: function() {
+        const hash = crypto.createHash('sha256');
+
+        let machineId;
+        let username = os.userInfo().username;
+
+        if (process.platform === 'win32') {
+            machineId = this.readRegistryValue('HKEY_LOCAL_MACHINE', 'SOFTWARE\\Microsoft\\Cryptography', 'MachineGuid').data;
+        } else if (process.platform === 'darwin') {
+            machineId = electronApp.getMachineId();
+        }
+
+        hash.update(machineId);
+        hash.update(username);
+
+        return hash.digest('hex');
+    },
     getDeviceId: function() {
         if (process.platform === 'win32') {
             return electronApp.getHostToken();
