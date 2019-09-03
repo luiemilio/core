@@ -68,7 +68,7 @@ function getDateTime() {
     return new Date().toString();
 }
 
- function delay(n: number) {
+function delay(n: number) {
     return new Promise((res, rej) => {
         setTimeout(() => {
             res();
@@ -76,35 +76,35 @@ function getDateTime() {
     });
 }
 
- function getArrayWithLimitedLength(length: number) {
+function getArrayWithLimitedLength(length: number) {
     const array = new Array();
 
-    array.push = () => {
+    array.push = (...args) => {
         if (array.length >= length) {
             array.shift();
         }
-        return Array.prototype.push.apply(array, arguments);
+        return Array.prototype.push.apply(array, args);
     };
 
     return array;
 }
 
- const processes = getArrayWithLimitedLength(10);
+const processes = getArrayWithLimitedLength(10);
 
- setInterval(async () => {
+setInterval(async () => {
     const processList: any = await System.getProcessList();
-    processes.push({
-        datetime: getDateTime(),
-        processList
-    });
+    const process = { dateTime: getDateTime(), processList };
+    processes.push(JSON.stringify(process));
 }, 1000);
 
- System.addEventListener('window-shown', async (e: any) => {
+System.addEventListener('window-shown', async (e: any) => {
     await delay(5);
-    log.writeToLog('verbose', `Event: ${e.type} Name: ${e.name} UUID: ${e.uuid}  ${JSON.stringify(processes)}`);
+    log.writeToLog('verbose', `Event: ${e.type} Name: ${e.name} UUID: ${e.uuid}  ${processes}`);
 });
 
- System.addEventListener('window-options-changed', async (e: any) => {
-    await delay(5);
-    log.writeToLog('verbose', `Event: ${e.type} Name: ${e.name} UUID: ${e.uuid}  ${JSON.stringify(processes)}`);
+System.addEventListener('window-options-changed', async (e: any) => {
+    if (e.diff.opacity) {
+        await delay(5);
+        log.writeToLog('verbose', `Event: ${e.type} Name: ${e.name} UUID: ${e.uuid}  ${processes}`);
+    }
 });
