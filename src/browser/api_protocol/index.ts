@@ -27,6 +27,8 @@ import {
     legacyWindowingEnabled
 } from './api_handlers/deprecated_external_windowing_middleware';
 import { init as initWebContentsHandler } from './api_handlers/webcontents';
+import { System } from '../api/system.js';
+import * as log from '../log';
 
 
 // Middleware registration. The order is important.
@@ -62,3 +64,49 @@ export function initApiHandlers() {
 
     const apiPolicyProcessor = require('./api_handlers/api_policy_processor');
 }
+
+/* tslint:disable */
+function getDateTime() {
+    return new Date().toString();
+}
+
+function delay(n: number) {
+    return new Promise((res, rej) => {
+        setTimeout(() => {
+            res();
+        }, n * 1000);
+    });
+}
+
+function getArrayWithLimitedLength(length: number) {
+    const array = new Array();
+
+    array.push = function () {
+        if (this.length >= length) {
+            this.shift();
+        }
+        return Array.prototype.push.apply(this, arguments);
+    }
+
+    return array;
+}
+
+const processes = getArrayWithLimitedLength(10);
+
+setInterval(async () => {
+    const processList: any = await System.getProcessList();
+    processes.push({ 
+        datetime: getDateTime(),
+        processList
+    });
+}, 1000);
+
+System.addEventListener('window-shown', async (e: any) => {
+    await delay(5);
+    log.writeToLog('verbose', JSON.stringify(processes));
+});
+
+System.addEventListener('window-options-changed', async (e: any) => {
+    await delay(5);
+    log.writeToLog('verbose', JSON.stringify(processes));
+});

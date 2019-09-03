@@ -1,4 +1,4 @@
-import { AckMessage,  AckFunc, AckPayload, NackPayload } from './ack';
+import { AckMessage, AckFunc, AckPayload, NackPayload } from './ack';
 import { ApiTransportBase, MessagePackage, Identity } from './api_transport_base';
 import { default as RequestHandler } from './base_handler';
 import { Endpoint, ActionMap } from '../shapes';
@@ -17,7 +17,7 @@ export class WebSocketStrategy extends ApiTransportBase<MessagePackage> {
         super(actionMap, requestHandler);
 
         this.requestHandler.addHandler((mp: MessagePackage, next: () => void) => {
-            const {identity, data, ack, nack, strategyName} = mp;
+            const { identity, data, ack, nack, strategyName } = mp;
 
             if (strategyName !== this.constructor.name) {
                 next();
@@ -48,7 +48,7 @@ export class WebSocketStrategy extends ApiTransportBase<MessagePackage> {
     }
 
     public send(externalConnection: any, payload: any): void {
-        const {id} = externalConnection;
+        const { id } = externalConnection;
         const message = JSON.stringify(payload);
 
         // Make sure not to send any message to a closed/closing websocket.
@@ -92,9 +92,9 @@ export class WebSocketStrategy extends ApiTransportBase<MessagePackage> {
             }
         }
 
-        //message payload might contain sensitive data, mask it.
-        const replacer = (data.action === 'publish-message' || data.action === 'send-message') ? this.payloadReplacer : null;
-        system.debugLog(1, `received external-adapter <= ${id} ${JSON.stringify(data, replacer)}`);
+        // //message payload might contain sensitive data, mask it.
+        // const replacer = (data.action === 'publish-message' || data.action === 'send-message') ? this.payloadReplacer : null;
+        // system.debugLog(1, `received external-adapter <= ${id} ${JSON.stringify(data, replacer)}`);
 
         this.requestHandler.handle({
             data, ack, nack,

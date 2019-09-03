@@ -6,6 +6,7 @@ import { AddressInfo } from 'net';
 import * as log from '../log';
 import idPool from '../int_pool';
 import route from '../../common/route';
+import { System } from '../api/system.js';
 
 class Server extends EventEmitter {
     private hasStarted: boolean;
@@ -105,19 +106,43 @@ class Server extends EventEmitter {
                     this.emit(route.connection('error'), id, error);
                 });
 
-                ws.on('close', ( /*code,message*/ ) => {
+                ws.on('close', ( /*code,message*/) => {
                     delete this.activeConnections[id];
                     idPool.release(id);
                     ws = null;
                     this.emit(route.connection('close'), id);
                 });
 
-                ws.on('open', ( /*open*/ ) => {
+                ws.on('open', ( /*open*/) => {
                     this.emit(route.connection('open'), id);
                 });
 
                 ws.on('message', (data, flags) => {
-                    this.emit(route.connection('message'), id, JSON.parse(data), flags);
+                    /* tslint:disable: max-line-length */
+
+                    // function payloadReplacer(key: string, value: any): any {
+                    //     if (key === 'payload') {
+                    //         return '***masked payload***';
+                    //     } else {
+                    //         return value;
+                    //     }
+                    // }
+
+                    const parsedData = JSON.parse(data);
+                    const payloadSize = data.length;
+
+                    // const replacer = (data.action === 'publish-message' || data.action === 'send-message') ? payloadReplacer : null;
+
+                    if (parsedData.action === 'publish-message' || parsedData.action === 'send-message') {
+                        System.debugLog(1, `received external-adapter <= ${id} action: ${parsedData.action}, payload: ***masked-payload***, messageId: ${parsedData.messageId}  | Size: ${payloadSize}`);
+                    } else {
+                        System.debugLog(1, `received external-adapter <= ${id} ${data} | Size: ${payloadSize}`);
+                    }
+
+                    this.emit(route.connection('message'), id, parsedData, flags);
+
+                    // this.emit(route.connection('message'), id, data, flags);
+                    /* tslint:enable: max-line-length */
                 });
             });
 
