@@ -171,7 +171,7 @@ export class ElipcStrategy extends ApiTransportBase<MessagePackage> {
 
             const stringy = JSON.stringify(rawData);
             const data = JSON.parse(stringy);
-            
+
             const configuration: ElIPCConfiguration = new ElIPCConfiguration(new BreadcrumbConfiguration(opts),
                                                                              new RendererBatchConfiguration(opts, data));
 
