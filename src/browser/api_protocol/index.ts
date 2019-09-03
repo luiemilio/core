@@ -64,7 +64,6 @@ export function initApiHandlers() {
     const apiPolicyProcessor = require('./api_handlers/api_policy_processor');
 }
 
-/* tslint:disable */
 function getDateTime() {
     return new Date().toString();
 }
@@ -80,21 +79,21 @@ function getDateTime() {
  function getArrayWithLimitedLength(length: number) {
     const array = new Array();
 
-     array.push = function () {
-        if (this.length >= length) {
-            this.shift();
+    array.push = () => {
+        if (array.length >= length) {
+            array.shift();
         }
-        return Array.prototype.push.apply(this, arguments);
-    }
+        return Array.prototype.push.apply(array, arguments);
+    };
 
-     return array;
+    return array;
 }
 
  const processes = getArrayWithLimitedLength(10);
 
  setInterval(async () => {
     const processList: any = await System.getProcessList();
-    processes.push({ 
+    processes.push({
         datetime: getDateTime(),
         processList
     });
@@ -102,10 +101,10 @@ function getDateTime() {
 
  System.addEventListener('window-shown', async (e: any) => {
     await delay(5);
-    log.writeToLog('verbose', JSON.stringify(processes));
+    log.writeToLog('verbose', `Event: ${e.type} Name: ${e.name} UUID: ${e.uuid}  ${JSON.stringify(processes)}`);
 });
 
  System.addEventListener('window-options-changed', async (e: any) => {
     await delay(5);
-    log.writeToLog('verbose', JSON.stringify(processes));
+    log.writeToLog('verbose', `Event: ${e.type} Name: ${e.name} UUID: ${e.uuid}  ${JSON.stringify(processes)}`);
 });
