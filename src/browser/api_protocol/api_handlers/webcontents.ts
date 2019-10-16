@@ -5,6 +5,7 @@ import { getTargetWindowIdentity, registerActionMap } from './api_protocol_base'
 import * as WebContents from '../../api/webcontents';
 import * as Preload from '../../preload_scripts';
 import { getWindowByUuidName, getBrowserViewByIdentity } from '../../core_state';
+import { isStrictNullChecksEnabled } from 'tslint';
 const { Application } = require('../../api/application');
 const successAck: APIPayloadAck = { success: true };
 
@@ -17,7 +18,8 @@ export const webContentsApiMap = {
     'stop-window-navigation': stopWindowNavigation,
     'reload-window': reloadWindow,
     'set-zoom-level': setZoomLevel,
-    'set-window-preload-state': setWindowPreloadState
+    'set-window-preload-state': setWindowPreloadState,
+    'print': print
 };
 export function init () {
     registerActionMap(webContentsApiMap, 'Window');
@@ -131,4 +133,23 @@ export function getElectronWebContents({uuid, name}: Identity, errDesc?: string)
     }
 
     return webContents;
+}
+
+function print(identity: Identity, message: APIMessage, ack: Acker, nack: (error: Error) => void): void {
+    const { payload } = message;
+    let { options } = payload;
+    if (!options) {
+        options = {};
+    }
+    const windowIdentity = getTargetWindowIdentity(payload);
+    const webContents = getElectronWebContents(windowIdentity);
+
+    WebContents.print(webContents, options, (success, errorType) => {
+        if (!success) {
+            const error = new Error(`Print Failed. Reason: ${errorType}`);
+            nack(error);
+        } else {
+            ack(successAck);
+        }
+    });
 }

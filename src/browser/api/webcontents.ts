@@ -204,3 +204,8 @@ export function setIframeHandlers (webContents: Electron.WebContents, contextObj
         ofEvents.emit(route.window('frame-disconnected', uuid, name), payload);
     };
 }
+
+// tslint:disable-next-line: max-line-length
+export function print(webContents: Electron.WebContents, options?: Electron.PrintOptions, callback?: (success: boolean, failureReason: 'cancelled' | 'failed') => void) {
+    webContents.print(options, callback);
+}
