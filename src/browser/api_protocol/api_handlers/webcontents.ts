@@ -135,21 +135,16 @@ export function getElectronWebContents({uuid, name}: Identity, errDesc?: string)
     return webContents;
 }
 
-function print(identity: Identity, message: APIMessage, ack: Acker, nack: (error: Error) => void): void {
+function print(identity: Identity, message: APIMessage, ack: Acker): void {
     const { payload } = message;
     let { options } = payload;
-    if (!options) {
-        options = {};
-    }
+    const dataAck = Object.assign({}, successAck);
     const windowIdentity = getTargetWindowIdentity(payload);
     const webContents = getElectronWebContents(windowIdentity);
+    if (!options) { options = {}; }
 
-    WebContents.print(webContents, options, (success, errorType) => {
-        if (!success) {
-            const error = new Error(`Print Failed. Reason: ${errorType}`);
-            nack(error);
-        } else {
-            ack(successAck);
-        }
+    WebContents.print(webContents, options).then((result) => {
+        dataAck.data = result;
+        ack(dataAck);
     });
 }
