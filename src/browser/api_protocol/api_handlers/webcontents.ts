@@ -17,7 +17,8 @@ export const webContentsApiMap = {
     'stop-window-navigation': stopWindowNavigation,
     'reload-window': reloadWindow,
     'set-zoom-level': setZoomLevel,
-    'set-window-preload-state': setWindowPreloadState
+    'set-window-preload-state': setWindowPreloadState,
+    'print': print
 };
 export function init () {
     registerActionMap(webContentsApiMap, 'Window');
@@ -131,4 +132,15 @@ export function getElectronWebContents({uuid, name}: Identity, errDesc?: string)
     }
 
     return webContents;
+}
+
+function print(identity: Identity, message: APIMessage, ack: Acker): void {
+    const { payload } = message;
+    let { options } = payload;
+    if (!options) { options = {}; }
+    const windowIdentity = getTargetWindowIdentity(payload);
+    const webContents = getElectronWebContents(windowIdentity);
+
+    WebContents.print(webContents, options);
+    ack(successAck);
 }

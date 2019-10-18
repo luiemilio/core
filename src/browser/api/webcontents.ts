@@ -204,3 +204,15 @@ export function setIframeHandlers (webContents: Electron.WebContents, contextObj
         ofEvents.emit(route.window('frame-disconnected', uuid, name), payload);
     };
 }
+
+export function print(webContents: Electron.WebContents, options?: Electron.PrintOptions) {
+    const newOpts = options;
+
+    if (!newOpts.deviceName) {
+        const printers = <Electron.PrinterInfo[]><unknown>webContents.getPrinters();
+        const defaultPrinter = printers.find((printer) => printer.isDefault === true);
+        newOpts.deviceName = defaultPrinter.name;
+    }
+
+    webContents.print(newOpts);
+}
