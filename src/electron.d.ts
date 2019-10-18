@@ -483,7 +483,7 @@ declare namespace Electron {
      * Emitted when the user wants to open a URL with the application. Your
      * application's `Info.plist` file must define the URL scheme within the
      * `CFBundleURLTypes` key, and set `NSPrincipalClass` to `AtomApplication`.
-     * 
+     *
 You should call `event.preventDefault()` if you want to handle this event.
      *
      * @platform darwin
@@ -803,7 +803,7 @@ You should call `event.preventDefault()` if you want to handle this event.
      * this event represents the `applicationWillFinishLaunching` notification of
      * `NSApplication`. You would usually set up listeners for the `open-file` and
      * `open-url` events here, and start the crash reporter and auto updater.
-     * 
+     *
 In most cases, you should do everything in the `ready` event handler.
      */
     on(event: 'will-finish-launching', listener: Function): this;
@@ -866,13 +866,13 @@ This method can only be called before app is ready.
     disableDomainBlockingFor3DAPIs(): void;
     /**
      * Disables hardware acceleration for current app.
-     * 
+     *
 This method can only be called before app is ready.
      */
     disableHardwareAcceleration(): void;
     /**
      * Enables full sandbox mode on the app.
-     * 
+     *
 This method can only be called before app is ready.
      *
      * @experimental
@@ -984,7 +984,7 @@ A unique (UUID) identifier for the machine.
     getHostToken(): string;
     /**
      * The runtime integrity level of the app.
-     * 
+     *
 Values: Unknown = 0 Low = 1 Medium = 2 High = 3 System = 4
      *
      * @platform win32
@@ -1017,7 +1017,7 @@ Values: Unknown = 0 Low = 1 Medium = 2 High = 3 System = 4
     /**
      * User operating system's locale two-letter ISO 3166 country code. The value is
      * taken from native OS APIs.
-     * 
+     *
 **Note:** When unable to detect locale country code, it returns empty string.
      */
     getLocaleCountryCode(): string;
@@ -1402,7 +1402,7 @@ The result message.
      *
      * **Note:** Unity launcher requires the existence of a `.desktop` file to work,
      * for more information please read Desktop Environment Integration.
-     * 
+     *
 **Deprecated**
      *
      * @platform linux,darwin
@@ -1437,7 +1437,7 @@ The result message.
      * removed item to a custom category earlier than that will result in the entire
      * custom category being omitted from the Jump List. The list of removed items can
      * be obtained using `app.getJumpListSettings()`.
-     * 
+     *
 Here's a very simple example of creating a custom Jump List:
      *
      * @platform win32
@@ -1813,7 +1813,7 @@ Here's a very simple example of creating a custom Jump List:
      * emitted as `browser-backward`.
      *
      * The following app commands are explicitly supported on Linux:
-     * 
+     *
 * `browser-backward`
 * `browser-forward`
      *
@@ -1959,7 +1959,7 @@ Here's a very simple example of creating a custom Jump List:
     removeListener(event: 'minimize', listener: Function): this;
     /**
      * Emitted when the window is being moved to a new position.
-     * 
+     *
 __Note__: On macOS this event is an alias of `moved`.
      */
     on(event: 'move', listener: Function): this;
@@ -2517,7 +2517,7 @@ __Note__: On macOS this event is an alias of `moved`.
     isAlwaysOnTop(): boolean;
     /**
      * Whether the window can be manually closed by user.
-     * 
+     *
 On Linux always returns `true`.
 
 **Deprecated**
@@ -2560,7 +2560,7 @@ On Linux always returns `true`.
     isKiosk(): boolean;
     /**
      * Whether the window can be manually maximized by user.
-     * 
+     *
 On Linux always returns `true`.
 
 **Deprecated**
@@ -2584,7 +2584,7 @@ On Linux always returns `true`.
     isMenuBarVisible(): boolean;
     /**
      * Whether the window can be manually minimized by user
-     * 
+     *
 On Linux always returns `true`.
 
 **Deprecated**
@@ -2602,7 +2602,7 @@ On Linux always returns `true`.
     isModal(): boolean;
     /**
      * Whether the window can be moved by user.
-     * 
+     *
 On Linux always returns `true`.
 
 **Deprecated**
@@ -2629,7 +2629,7 @@ On Linux always returns `true`.
     isSimpleFullScreen(): boolean;
     /**
      * Returns whether user size and position changes are enabled on the window.
-     * 
+     *
 **Note:** This API always returns true when on platforms other than Windows.
      */
     isUserMovementEnabled(): void;
@@ -2639,7 +2639,7 @@ On Linux always returns `true`.
     isVisible(): boolean;
     /**
      * Whether the window is visible on all workspaces.
-     * 
+     *
 **Note:** This API always returns false on Windows.
      */
     isVisibleOnAllWorkspaces(): boolean;
@@ -2816,7 +2816,7 @@ On Linux always returns `true`.
     setBrowserView(browserView: (BrowserView) | (null)): void;
     /**
      * Sets whether the window can be manually closed by user. On Linux does nothing.
-     * 
+     *
 **Deprecated**
      *
      * @platform darwin,win32
@@ -2853,7 +2853,7 @@ On Linux always returns `true`.
     setEnabled(enable: boolean): void;
     /**
      * Changes whether the window can be focused.
-     * 
+     *
 On macOS it does not remove the focus from the window.
      *
      * @platform darwin,win32
@@ -2932,7 +2932,7 @@ On macOS it does not remove the focus from the window.
     setMinimumSize(width: number, height: number): void;
     /**
      * Sets whether the window can be moved by user. On Linux does nothing.
-     * 
+     *
 **Deprecated**
      *
      * @platform darwin,win32
@@ -3127,7 +3127,7 @@ On macOS it does not remove the focus from the window.
     setTouchBar(touchBar: (TouchBar) | (null)): void;
     /**
      * Enable/disable user changes to size and position of the window.
-     * 
+     *
 **Note:** This API only works on Windows.
      */
     setUserMovementEnabled(enabled: boolean): void;
@@ -3143,13 +3143,13 @@ On macOS it does not remove the focus from the window.
     setVibrancy(type: (('appearance-based' | 'light' | 'dark' | 'titlebar' | 'selection' | 'menu' | 'popover' | 'sidebar' | 'medium-light' | 'ultra-dark' | 'header' | 'sheet' | 'window' | 'hud' | 'fullscreen-ui' | 'tooltip' | 'content' | 'under-window' | 'under-page')) | (null)): void;
     /**
      * Sets whether the window should be visible on all workspaces.
-     * 
+     *
 **Note:** This API does nothing on Windows.
      */
     setVisibleOnAllWorkspaces(visible: boolean, options?: VisibleOnAllWorkspacesOptions): void;
     /**
      * Sets whether the window traffic light buttons should be visible.
-     * 
+     *
 This cannot be called when `titleBarStyle` is set to `customButtonsOnHover`.
      *
      * @platform darwin
@@ -3812,7 +3812,7 @@ This cannot be called when `titleBarStyle` is set to `customButtonsOnHover`.
     removeListener(event: 'changed', listener: Function): this;
     /**
      * A promise which resolves when the cookie store has been flushed
-     * 
+     *
 Writes any unwritten cookies data to disk.
      */
     flushStore(): Promise<void>;
@@ -3825,13 +3825,13 @@ Writes any unwritten cookies data to disk.
     get(filter: Filter): Promise<Electron.Cookie[]>;
     /**
      * A promise which resolves when the cookie has been removed
-     * 
+     *
 Removes the cookies matching `url` and `name`
      */
     remove(url: string, name: string): Promise<void>;
     /**
      * A promise which resolves when the cookie has been set
-     * 
+     *
 Sets a cookie with `details`.
      */
     set(details: Details): Promise<void>;
@@ -3893,7 +3893,7 @@ Sets a cookie with `details`.
     /**
      * Whether reports should be submitted to the server. Set through the `start`
      * method or `setUploadToServer`.
-     * 
+     *
 **Note:** This API can only be called from the main process.
      */
     getUploadToServer(): boolean;
@@ -3907,7 +3907,7 @@ Sets a cookie with `details`.
     /**
      * This would normally be controlled by user preferences. This has no effect if
      * called before `start` is called.
-     * 
+     *
 **Note:** This API can only be called from the main process.
      */
     setUploadToServer(uploadToServer: boolean): void;
@@ -4043,7 +4043,7 @@ Sets a cookie with `details`.
      * A promise that resolves with the response defined by the 'returns' attribute of
      * the command description in the remote debugging protocol or is rejected
      * indicating the failure of the command.
-     * 
+     *
 Send given command to the debugging target.
      */
     sendCommand(method: string, commandParams?: any): Promise<any>;
@@ -4607,7 +4607,7 @@ Send given command to the debugging target.
     getState(): ('progressing' | 'completed' | 'cancelled' | 'interrupted');
     /**
      * The total size in bytes of the download item.
-     * 
+     *
 If the size is unknown, it returns 0.
      */
     getTotalBytes(): number;
@@ -4650,7 +4650,7 @@ If the size is unknown, it returns 0.
      * The API is only available in session's `will-download` callback function. If
      * user doesn't set the save path via the API, Electron will use the original
      * routine to determine the save path; this usually prompts a save dialog.
-     * 
+     *
 **Deprecated: use the `savePath` property instead.**
      */
     setSavePath(path: string): void;
@@ -4691,7 +4691,7 @@ Returns the process id and handle in an object.
      * launches the application specified by <path> in the working <directory> with the
      * command line <args>. If <close> is true, the child process is automatically
      * closed when the openfin process exits.
-     * 
+     *
 Returns the process id and handle in an object.
      */
     static launch(path: string, directory: string, args: string, close: boolean): void;
@@ -5051,7 +5051,7 @@ Terminates the process.
     finishTransactionByDate(date: string): void;
     /**
      * Resolves with an array of `Product` objects.
-     * 
+     *
 Retrieves the product descriptions.
      */
     getProducts(productIDs: string[]): Promise<Electron.Product[]>;
@@ -5273,7 +5273,7 @@ Retrieves the product descriptions.
      * no functions or prototype chain will be included.
      *
      * The main process should listen for `channel` with `ipcMain.handle()`.
-     * 
+     *
 For example:
      */
     invoke(channel: string, ...args: any[]): Promise<any>;
@@ -5775,7 +5775,7 @@ For example:
      *
      * `echo -e '#import <Cocoa/Cocoa.h>\nint main() { NSLog(@"%@", SYSTEM_IMAGE_NAME);
      * }' | clang -otest -x objective-c -framework Cocoa - && ./test`
-     * 
+     *
 where `SYSTEM_IMAGE_NAME` should be replaced with any value from this list.
      *
      * @platform darwin
@@ -6042,7 +6042,7 @@ Please note that this property only has an effect on macOS.
 
     /**
      * resolves when the net log has begun recording.
-     * 
+     *
 Starts recording network events to `path`.
      */
     startLogging(path: string, options?: StartLoggingOptions): Promise<void>;
@@ -6661,7 +6661,7 @@ Example:
      *
      * By default the HTTP request will reuse the current session. If you want the
      * request to have a different session you should set `session` to `null`.
-     * 
+     *
 For POST requests the `uploadData` object must be provided.
      */
     registerHttpProtocol(scheme: string, handler: (request: HandlerRequest, callback: (redirectRequest: CallbackRedirectRequest) => void) => void, completion?: (error: Error) => void): void;
@@ -6700,7 +6700,7 @@ For POST requests the `uploadData` object must be provided.
      * functionality of the previous `protocol.registerStandardSchemes`,
      * `webFrame.registerURLSchemeAs*` and `protocol.registerServiceWorkerSchemes`
      * functions that existed prior to Electron 5.0.0, for example:
-     * 
+     *
 **before (<= v4.x)**
 
 **after (>= v5.x)**
@@ -7049,7 +7049,7 @@ e.g.
     getDisplayNearestPoint(point: Point): Display;
     /**
      * Returns the DPI for the x and y axes:
-     * 
+     *
 * Object
   * `width` Integer
   * `height` Integer
@@ -7236,7 +7236,7 @@ e.g.
     clearAuthCache(options: (RemovePassword) | (RemoveClientCertificate)): Promise<void>;
     /**
      * resolves when the cache clear operation is complete.
-     * 
+     *
 Clears the session’s HTTP cache.
      */
     clearCache(): Promise<void>;
@@ -7422,7 +7422,7 @@ Returns the system's proxy configuration.
     beep(): void;
     /**
      * Whether the item was successfully moved to the trash.
-     * 
+     *
 Move the given file to trash and returns a boolean status for the operation.
      */
     moveItemToTrash(fullPath: string): boolean;
@@ -7433,13 +7433,13 @@ Move the given file to trash and returns a boolean status for the operation.
     openExternal(url: string, options?: OpenExternalOptions): Promise<void>;
     /**
      * Whether the item was successfully opened.
-     * 
+     *
 Open the given file in the desktop's default manner.
      */
     openItem(fullPath: string): boolean;
     /**
      * Resolves the shortcut link at `shortcutPath`.
-     * 
+     *
 An exception will be thrown when any error happens.
      *
      * @platform win32
@@ -7451,7 +7451,7 @@ An exception will be thrown when any error happens.
     showItemInFolder(fullPath: string): void;
     /**
      * Whether the shortcut was created successfully.
-     * 
+     *
 Creates or updates a shortcut link at `shortcutPath`.
      *
      * @platform win32
@@ -7459,7 +7459,7 @@ Creates or updates a shortcut link at `shortcutPath`.
     writeShortcutLink(shortcutPath: string, operation: 'create' | 'update' | 'replace', options: ShortcutDetails): boolean;
     /**
      * Whether the shortcut was created successfully.
-     * 
+     *
 Creates or updates a shortcut link at `shortcutPath`.
      *
      * @platform win32
@@ -7666,7 +7666,7 @@ Creates or updates a shortcut link at `shortcutPath`.
     canPromptTouchID(): boolean;
     /**
      * The users current system wide accent color preference in RGBA hexadecimal form.
-     * 
+     *
 This API is only available on macOS 10.14 Mojave or newer.
      *
      * @platform win32,darwin
@@ -7680,7 +7680,7 @@ This API is only available on macOS 10.14 Mojave or newer.
      * whether scroll animations (e.g. produced by home/end key) should be enabled.
      * * `prefersReducedMotion` Boolean - Determines whether the user desires reduced
      * motion based on platform APIs.
-     * 
+     *
 Returns an object with system animation settings.
      */
     getAnimationSettings(): AnimationSettings;
@@ -7774,7 +7774,7 @@ Returns an object with system animation settings.
      * value when in the "automatic" dark mode setting you must either have
      * `NSRequiresAquaSystemAppearance=false` in your `Info.plist` or be on Electron
      * `>=7.0.0`.  See the dark mode guide for more information.
-     * 
+     *
 **Deprecated:** Should use the new `nativeTheme.shouldUseDarkColors` API.
      *
      * @deprecated
@@ -7868,7 +7868,7 @@ Returns an object with system animation settings.
     /**
      * Sets the appearance setting for your application, this should override the
      * system default and override the value of `getEffectiveAppearance`.
-     * 
+     *
 **Deprecated**
      *
      * @deprecated
@@ -7880,7 +7880,7 @@ Returns an object with system animation settings.
      *
      * Note that `type` should match actual type of `value`. An exception is thrown if
      * they don't.
-     * 
+     *
 Some popular `key` and `type`s are:
 
 * `ApplePressAndHoldEnabled`: `boolean`
@@ -7957,7 +7957,7 @@ Some popular `key` and `type`s are:
      *
      * Possible values that can be set are `dark` and `light`, and possible return
      * values are `dark`, `light`, and `unknown`.
-     * 
+     *
 This property is only available on macOS 10.14 Mojave or newer.
      *
      * @platform darwin
@@ -8601,7 +8601,7 @@ This property is only available on macOS 10.14 Mojave or newer.
      *   * `y` Integer
      *   * `width` Integer
      *   * `height` Integer
-     * 
+     *
 Returns the location of the tray icon in screen coordinates.
      */
     getIconRect(): void;
@@ -8624,7 +8624,7 @@ Returns the location of the tray icon in screen coordinates.
     /**
      * Pops up the context menu of the tray icon. When `menu` is passed, the `menu`
      * will be shown instead of the tray icon's context menu.
-     * 
+     *
 The `position` is only available on Windows, and it is (0, 0) by default.
      *
      * @platform darwin,win32
@@ -8637,7 +8637,7 @@ The `position` is only available on Windows, and it is (0, 0) by default.
     /**
      * Sets the option to ignore double click events. Ignoring these events allows you
      * to detect every individual click of the tray icon.
-     * 
+     *
 This value is set to false by default.
      *
      * @platform darwin
@@ -8763,7 +8763,7 @@ This value is set to false by default.
      * Emitted before dispatching the `keydown` and `keyup` events in the page. Calling
      * `event.preventDefault` will prevent the page `keydown`/`keyup` events and the
      * menu shortcuts.
-     * 
+     *
 To only prevent the menu shortcuts, use `setIgnoreMenuShortcuts`:
      */
     on(event: 'before-input-event', listener: (event: Event,
@@ -8788,7 +8788,7 @@ To only prevent the menu shortcuts, use `setIgnoreMenuShortcuts`:
                                                input: Input) => void): this;
     /**
      * Emitted when failed to verify the `certificate` for `url`.
-     * 
+     *
 The usage is the same with the `certificate-error` event of `app`.
      */
     on(event: 'certificate-error', listener: (event: Event,
@@ -9494,7 +9494,7 @@ The usage is the same with the `certificate-error` event of `app`.
     removeListener(event: 'leave-html-full-screen', listener: Function): this;
     /**
      * Emitted when `webContents` wants to do basic auth.
-     * 
+     *
 The usage is the same with the `login` event of `app`.
      */
     on(event: 'login', listener: (event: Event,
@@ -9823,7 +9823,7 @@ The usage is the same with the `login` event of `app`.
                                                     callback: (deviceId: string) => void) => void): this;
     /**
      * Emitted when a client certificate is requested.
-     * 
+     *
 The usage is the same with the `select-client-certificate` event of `app`.
      */
     on(event: 'select-client-certificate', listener: (event: Event,
@@ -10124,7 +10124,7 @@ Code execution will be suspended until web page stop loading.
     getFrameName(frameRoutingId: number): string;
     /**
      * If *offscreen rendering* is enabled returns the current frame rate.
-     * 
+     *
 **Deprecated**
      */
     getFrameRate(): number;
@@ -10333,7 +10333,7 @@ Would require code like this
      * printing.
      *
      * Use `page-break-before: always;` CSS style to force to print to a new page.
-     * 
+     *
 Example usage:
      */
     print(options?: PrintOptions, callback?: (success: boolean, failureReason: 'cancelled' | 'failed') => void): void;
@@ -10348,7 +10348,7 @@ Example usage:
      * By default, an empty `options` will be regarded as:
      *
      * Use `page-break-before: always;` CSS style to force to print to a new page.
-     * 
+     *
 An example of `webContents.printToPDF`:
      */
     printToPDF(options: PrintToPDFOptions): Promise<Buffer>;
@@ -10398,7 +10398,7 @@ An example of `webContents.printToPDF`:
      *
      * The renderer process can handle the message by listening to `channel` with the
      * `ipcRenderer` module.
-     * 
+     *
 An example of sending messages from the main process to the renderer process:
      */
     send(channel: string, ...args: any[]): void;
@@ -10417,7 +10417,7 @@ An example of sending messages from the main process to the renderer process:
      *
      * If you want to get the `frameId` of a given renderer context you should use the
      * `webFrame.routingId` value.  E.g.
-     * 
+     *
 You can also read `frameId` from all incoming IPC messages in the main process.
      */
     sendToFrame(frameId: number, channel: string, ...args: any[]): void;
@@ -10448,7 +10448,7 @@ You can also read `frameId` from all incoming IPC messages in the main process.
      * caller's responsibility to destroy `devToolsWebContents`.
      *
      * An example of showing devtools in a `<webview>` tag:
-     * 
+     *
 An example of showing devtools in a `BrowserWindow`:
      */
     setDevToolsWebContents(devToolsWebContents: WebContents): void;
@@ -10538,7 +10538,7 @@ An example of showing devtools in a `BrowserWindow`:
     stopPainting(): void;
     /**
      * Indicates whether the snapshot has been created successfully.
-     * 
+     *
 Takes a V8 heap snapshot and saves it to `filePath`.
      */
     takeHeapSnapshot(filePath: string): Promise<void>;
@@ -10595,7 +10595,7 @@ Takes a V8 heap snapshot and saves it to `filePath`.
     /**
      * A promise that resolves with the result of the executed code or is rejected if
      * the result of the code is a rejected promise.
-     * 
+     *
 Works like `executeJavaScript` but evaluates `scripts` in an isolated context.
      */
     executeJavaScriptInIsolatedWorld(worldId: number, scripts: WebSource[], userGesture?: boolean): Promise<any>;
@@ -10756,7 +10756,7 @@ An example of using node-spellchecker as provider:
      * The `uploadData` is an array of `UploadData` objects.
      *
      * The `callback` has to be called with an `response` object.
-     * 
+     *
 Some examples of valid `urls`:
      */
     onBeforeRequest(listener: ((details: OnBeforeRequestListenerDetails, callback: (response: Response) => void) => void) | (null)): void;
@@ -10767,7 +10767,7 @@ Some examples of valid `urls`:
      * The `uploadData` is an array of `UploadData` objects.
      *
      * The `callback` has to be called with an `response` object.
-     * 
+     *
 Some examples of valid `urls`:
      */
     onBeforeRequest(filter: OnBeforeRequestFilter, listener: ((details: OnBeforeRequestListenerDetails, callback: (response: Response) => void) => void) | (null)): void;
@@ -10775,7 +10775,7 @@ Some examples of valid `urls`:
      * The `listener` will be called with `listener(details, callback)` before sending
      * an HTTP request, once the request headers are available. This may occur after a
      * TCP connection is made to the server, but before any http data is sent.
-     * 
+     *
 The `callback` has to be called with an `response` object.
      */
     onBeforeSendHeaders(filter: OnBeforeSendHeadersFilter, listener: ((details: OnBeforeSendHeadersListenerDetails, callback: (response: CallbackResponse) => void) => void) | (null)): void;
@@ -10783,7 +10783,7 @@ The `callback` has to be called with an `response` object.
      * The `listener` will be called with `listener(details, callback)` before sending
      * an HTTP request, once the request headers are available. This may occur after a
      * TCP connection is made to the server, but before any http data is sent.
-     * 
+     *
 The `callback` has to be called with an `response` object.
      */
     onBeforeSendHeaders(listener: ((details: OnBeforeSendHeadersListenerDetails, callback: (response: CallbackResponse) => void) => void) | (null)): void;
@@ -10808,14 +10808,14 @@ The `callback` has to be called with an `response` object.
     /**
      * The `listener` will be called with `listener(details, callback)` when HTTP
      * response headers of a request have been received.
-     * 
+     *
 The `callback` has to be called with an `response` object.
      */
     onHeadersReceived(filter: OnHeadersReceivedFilter, listener: ((details: OnHeadersReceivedListenerDetails, callback: (response: CallbackResponse) => void) => void) | (null)): void;
     /**
      * The `listener` will be called with `listener(details, callback)` when HTTP
      * response headers of a request have been received.
-     * 
+     *
 The `callback` has to be called with an `response` object.
      */
     onHeadersReceived(listener: ((details: OnHeadersReceivedListenerDetails, callback: (response: CallbackResponse) => void) => void) | (null)): void;
@@ -10936,7 +10936,7 @@ The `callback` has to be called with an `response` object.
     removeEventListener(event: 'found-in-page', listener: (event: FoundInPageEvent) => void): this;
     /**
      * Fired when the guest page attempts to open a new browser window.
-     * 
+     *
 The following example code opens the new url in system's default browser.
      */
     addEventListener(event: 'new-window', listener: (event: NewWindowEvent) => void, useCapture?: boolean): this;
@@ -11244,7 +11244,7 @@ Calling `event.preventDefault()` does __NOT__ have any effect.
     print(options?: PrintOptions): Promise<void>;
     /**
      * Resolves with the generated PDF data.
-     * 
+     *
 Prints `webview`'s web page as PDF, Same as `webContents.printToPDF(options)`.
      */
     printToPDF(options: PrintToPDFOptions): Promise<Buffer>;
@@ -11283,13 +11283,13 @@ Prints `webview`'s web page as PDF, Same as `webContents.printToPDF(options)`.
      * Send an asynchronous message to renderer process via `channel`, you can also
      * send arbitrary arguments. The renderer process can handle the message by
      * listening to the `channel` event with the `ipcRenderer` module.
-     * 
+     *
 See webContents.send for examples.
      */
     send(channel: string, ...args: any[]): Promise<void>;
     /**
      * Sends an input `event` to the page.
-     * 
+     *
 See webContents.sendInputEvent for detailed description of `event` object.
      */
     sendInputEvent(event: (MouseInputEvent) | (MouseWheelInputEvent) | (KeyboardInputEvent)): Promise<void>;
@@ -14657,7 +14657,7 @@ declare namespace NodeJS {
     /**
      * Emitted when Electron has loaded its internal initialization script and is
      * beginning to load the web page or the main script.
-     * 
+     *
      * It can be used by the preload script to add removed Node global symbols back to
      * the global scope when node integration is turned off:
      */
@@ -14673,7 +14673,7 @@ declare namespace NodeJS {
      * * `allocated` Integer - Size of all allocated objects in Kilobytes.
      * * `marked` Integer - Size of all marked objects in Kilobytes.
      * * `total` Integer - Total allocated space in Kilobytes.
-     * 
+     *
      * Returns an object with Blink memory information. It can be useful for debugging
      * rendering / DOM related memory issues. Note that all values are reported in
      * Kilobytes.
@@ -14683,7 +14683,7 @@ declare namespace NodeJS {
     /**
      * The number of milliseconds since epoch, or `null` if the information is
      * unavailable
-     * 
+     *
      * Indicates the creation time of the application. The time is represented as
      * number of milliseconds since epoch. It returns null if it is unable to get the
      * process creation time.
@@ -14699,7 +14699,7 @@ declare namespace NodeJS {
      * * `mallocedMemory` Integer
      * * `peakMallocedMemory` Integer
      * * `doesZapGarbage` Boolean
-     * 
+     *
      * Returns an object with V8 heap statistics. Note that all statistics are reported
      * in Kilobytes.
      */
@@ -14707,11 +14707,11 @@ declare namespace NodeJS {
     getIOCounters(): Electron.IOCounters;
     /**
      * Resolves with a ProcessMemoryInfo
-     * 
+     *
      * Returns an object giving memory usage statistics about the current process. Note
      * that all statistics are reported in Kilobytes. This api should be called after
      * app ready.
-     * 
+     *
      * Chromium does not provide `residentSet` value for macOS. This is because macOS
      * performs in-memory compression of pages that haven't been recently used. As a
      * result the resident set size value is not what one would expect. `private`
@@ -14728,20 +14728,20 @@ declare namespace NodeJS {
      * Kilobytes available to the system.
      * * `swapFree` Integer _Windows_ _Linux_ - The free amount of swap memory in
      * Kilobytes available to the system.
-     * 
+     *
      * Returns an object giving memory usage statistics about the entire system. Note
      * that all statistics are reported in Kilobytes.
      */
     getSystemMemoryInfo(): Electron.SystemMemoryInfo;
     /**
      * The version of the host operating system.
-     * 
+     *
      * Examples:
-     * 
+     *
      * * `macOS` -> `10.13.6`
      * * `Windows` -> `10.0.17763`
      * * `Linux` -> `4.15.0-45-generic`
-     * 
+     *
      * **Note:** It returns the actual operating system version instead of kernel
      * version on macOS unlike `os.release()`.
      */
@@ -14759,7 +14759,7 @@ declare namespace NodeJS {
     setFdLimit(maxDescriptors: number): void;
     /**
      * Indicates whether the snapshot has been created successfully.
-     * 
+     *
 Takes a V8 heap snapshot and saves it to `filePath`.
      */
     takeHeapSnapshot(filePath: string): boolean;
