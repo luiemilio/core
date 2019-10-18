@@ -5,11 +5,8 @@ import { getTargetWindowIdentity, registerActionMap } from './api_protocol_base'
 import * as WebContents from '../../api/webcontents';
 import * as Preload from '../../preload_scripts';
 import { getWindowByUuidName, getBrowserViewByIdentity } from '../../core_state';
-import { isStrictNullChecksEnabled } from 'tslint';
 const { Application } = require('../../api/application');
 const successAck: APIPayloadAck = { success: true };
-
-import { platform } from 'os';
 
 export const webContentsApiMap = {
     'execute-javascript-in-window': { apiFunc: executeJavascript, apiPath: '.executeJavaScript' },
