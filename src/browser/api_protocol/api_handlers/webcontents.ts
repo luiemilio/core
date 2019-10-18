@@ -18,7 +18,8 @@ export const webContentsApiMap = {
     'reload-window': reloadWindow,
     'set-zoom-level': setZoomLevel,
     'set-window-preload-state': setWindowPreloadState,
-    'print': print
+    'print': print,
+    'get-printers': getPrinters
 };
 export function init () {
     registerActionMap(webContentsApiMap, 'Window');
@@ -143,4 +144,14 @@ function print(identity: Identity, message: APIMessage, ack: Acker): void {
 
     WebContents.print(webContents, options);
     ack(successAck);
+}
+
+function getPrinters(identity: Identity, message: APIMessage, ack: Acker): void {
+    // const { payload } = message;
+    // const windowIdentity = getTargetWindowIdentity(payload);
+    const webContents = getElectronWebContents(identity);
+
+    const dataAck = Object.assign({}, successAck);
+    dataAck.data = WebContents.getPrinters(webContents);
+    ack(dataAck);
 }

@@ -216,3 +216,7 @@ export function print(webContents: Electron.WebContents, options?: Electron.Prin
 
     webContents.print(newOpts);
 }
+
+export function getPrinters(webContents: Electron.WebContents) {
+    return webContents.getPrinters();
+}
