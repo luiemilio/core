@@ -5,6 +5,7 @@ import ofEvents from '../of_events';
 import route, { WindowRoute } from '../../common/route';
 import { InjectableContext, EntityType } from '../../shapes';
 import { prepareConsoleMessageForRVM } from '../rvm/utils';
+import { WebContents } from '../../../js-adapter/src/api/webcontents/webcontents';
 
 
 export function hookWebContentsEvents(webContents: Electron.WebContents, { uuid, name }: Identity, topic: string, routeFunc: WindowRoute) {
@@ -205,11 +206,14 @@ export function setIframeHandlers (webContents: Electron.WebContents, contextObj
     };
 }
 
-// tslint:disable-next-line: max-line-length
-export function print(webContents: Electron.WebContents, options?: Electron.PrintOptions, callback?: (success: boolean, failureReason: 'cancelled' | 'failed') => void) {
-    return new Promise((resolve) => {
-        webContents.print(options, (success, failureReason) => {
-            resolve({ success, failureReason });
-        });
-    });
+export function print(webContents: Electron.WebContents, options?: Electron.PrintOptions) {
+    const newOpts = options;
+
+    if (!newOpts.deviceName) {
+        const printers = <Electron.PrinterInfo[]><unknown>webContents.getPrinters();
+        const defaultPrinter = printers.find((printer) => printer.isDefault === true);
+        newOpts.deviceName = defaultPrinter.name;
+    }
+
+    webContents.print(newOpts);
 }

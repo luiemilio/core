@@ -9,6 +9,8 @@ import { isStrictNullChecksEnabled } from 'tslint';
 const { Application } = require('../../api/application');
 const successAck: APIPayloadAck = { success: true };
 
+import { platform } from 'os';
+
 export const webContentsApiMap = {
     'execute-javascript-in-window': { apiFunc: executeJavascript, apiPath: '.executeJavaScript' },
     'get-zoom-level': getZoomLevel,
@@ -138,13 +140,10 @@ export function getElectronWebContents({uuid, name}: Identity, errDesc?: string)
 function print(identity: Identity, message: APIMessage, ack: Acker): void {
     const { payload } = message;
     let { options } = payload;
-    const dataAck = Object.assign({}, successAck);
+    if (!options) { options = {}; }
     const windowIdentity = getTargetWindowIdentity(payload);
     const webContents = getElectronWebContents(windowIdentity);
-    if (!options) { options = {}; }
 
-    WebContents.print(webContents, options).then((result) => {
-        dataAck.data = result;
-        ack(dataAck);
-    });
+    WebContents.print(webContents, options);
+    ack(successAck);
 }
