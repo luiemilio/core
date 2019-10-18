@@ -5,8 +5,6 @@ import ofEvents from '../of_events';
 import route, { WindowRoute } from '../../common/route';
 import { InjectableContext, EntityType } from '../../shapes';
 import { prepareConsoleMessageForRVM } from '../rvm/utils';
-import { WebContents } from '../../../js-adapter/src/api/webcontents/webcontents';
-
 
 export function hookWebContentsEvents(webContents: Electron.WebContents, { uuid, name }: Identity, topic: string, routeFunc: WindowRoute) {
     webContents.on('did-get-response-details', (e,
